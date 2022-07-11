@@ -48,6 +48,12 @@
   </div>
   <div class="column">
     <h2>Faiss</h2>
+    <ol>
+    {% for f_result in faiss_imgs_paths %}
+    <li></li>
+    <img src="{{url_for('send_img',filename=f_result)}}">
+    {% endfor %}
+    </ol>
 
   </div>
 </div>
