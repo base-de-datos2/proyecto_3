@@ -92,7 +92,7 @@ A continuación los tiempos de experimentación para los algoritmos implementado
 |6400|0.0983|0.0295|0.0002|
 |12800|0.1914|0.065|0.0002|
 
-El archivo para los tests se llama [experimentacion.py](./experimentacion.py).
+Lo cual, como también se vio en el video, nos demuestra que un índice que usa un método de aproximación es más eficiente. Es decir, si buscaramos un cliente satisfecho con sus queries nos interesa usar índices como el HNSW. El archivo para los tests se llama [experimentacion.py](./experimentacion.py).
 
 
 ## Levantar el proyecto
