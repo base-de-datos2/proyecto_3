@@ -92,7 +92,7 @@ A continuación los tiempos de experimentación para los algoritmos implementado
 |6400|0.0983|0.0295|0.0002|
 |12800|0.1914|0.065|0.0002|
 
-El archivo para los tests se llama [crear_indices.py]().
+El archivo para los tests se llama [crear_indices.py](./experimentacion.py).
 
 
 ## Levantar el proyecto
