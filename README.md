@@ -1,5 +1,8 @@
 # Proyecto 3
 
+> Integrantes:
+|-|Participación|
+-----------------
 
 1. KNN Secuencial
 
@@ -8,8 +11,9 @@ Se ha utilizado un max-heap para guardar los k elementos más cercanos.
 
 2. KNN R-Tree
 
-Con respecto a la búsqueda de KNN con R-Tree, se ha utilizado una libreria rtree en python. Dado a que el vector característico que devuelve la función face_encodings tiene 128 valores, se ha configurado el rtree para que soporte estas 128 dimensiones.
+Con respecto a la búsqueda de KNN con R-Tree, se ha utilizado una libreria rtree en python. Dado a que el vector característico que devuelve la función face_encodings tiene 128 valores, se ha configurado el rtree para que soporte estas 128 dimensiones. Para conseguir los k vecinos más cercanos a la imágen de búsqeuda, se utilizará la función de la librería de rtree llamada "nearest". 
 
-Para construir el índice, se debe correr el archivo [crear_indices.py](/crear_indices.py)
+Para construir el índice, se debe correr el archivo [crear_indices.py](/crear_indices.py). 
 
 3. KNN Faiss
+
