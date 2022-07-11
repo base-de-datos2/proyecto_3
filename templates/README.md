@@ -5,6 +5,11 @@
 |Francisco Magot|KNN Secuencial, KNN R-Tree|100%|
 |Eric Bracamonte|KNN Faiss, App en Flask|100%|
 
+> Objetivos del proyecto
+Usar librerías para implementar un servicio de reconocimiento facial con una búsqueda knn. Se desea
+mostrar la diferencia de tiempos para cada método de indexación.
+
+> Librerías usadas
 ## Objetivos del proyecto
 
 Usar librerías para implementar un servicio de reconocimiento facial con una búsqueda knn. Se desea
@@ -15,6 +20,7 @@ mostrar la diferencia de tiempos para cada método de indexación.
 - python-rtree
 - faiss (usando índice hnsw)
 
+> Estrategia general y métodos implementados 
 ## Estrategia general y métodos implementados 
 
 Para un reconocimiento facial necesitamos dos cosas: un repositorio de imágenes y estrategias de indexación para los vectores característicos. Por lo primero, 
@@ -65,11 +71,13 @@ Para construir el índice, se debe correr el archivo [crear_indices.py](/crear_i
 |6400||||
 |12800||||
 
+> Video de demostración
 ## Video de demostración
 
 https://youtu.be/9dS-W3B6TUo
 
 
+> Levantar el proyecto
 ## Levantar el proyecto
 
 Se tiene que estar en un sistema operativo POSIX (LINUX o MAC) y ejecutar el *crear_indices.py*. En caso haya pasado algo con el archivo vector_imgs.npy,
