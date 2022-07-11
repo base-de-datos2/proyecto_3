@@ -23,13 +23,15 @@ Para construir el índice, se debe correr el archivo [crear_indices.py](/crear_i
 
 ## Experimentación
 
+A continuación los tiempos de experimentación para los algoritmos implementados. Considerar que se utilizó un valor de K = 8 sobre una colección de imágenes de tamaño n. Todos los tiempos están expresados en segundos.
+
 |n|KNN Secuencial|KNN RTree|KNN Faiss|
 |-|-|-|-|
-|100||||
-|200||||
-|400||||
-|800||||
-|1600||||
-|3200||||
-|6400||||
-|12800||||
+|100|0.0022|0.0004|0.0035|
+|200|0.0039|0.0021|0.0001|
+|400|0.0069|0.0025|0.0079|
+|800|0.0146|0.0049|0.0002|
+|1600|0.0264|0.0085|0.0001|
+|3200|0.0548|0.0169|0.0001|
+|6400|0.0983|0.0295|0.0002|
+|12800|0.191|0.065|0.0002|
