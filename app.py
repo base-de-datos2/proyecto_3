@@ -18,30 +18,33 @@ with open('vector_imgs.npy',"rb") as file:
 faiss_index= faiss.read_index("faiss_index.dat")
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+p = rtindex.Property()
+p.dimension = 128
+p.dat_extension = "data"
+p.idx_extension = "index"
 
 
-@app.route('/range-query')
-def range_query():
-    return render_template('range_query.html')
+rtree_index = rtindex.Index("puntos", properties = p)
 
 
 
-@app.route('/knn-query',methods=['GET','POST'])
+
+
+@app.route('/',methods=['GET','POST'])
 def knn_query():
-    return render_template('knn_query.html')
+    return render_template('index.html')
    
-
 
 
 
 
 @app.route('/get-img/<filename>')
 def send_img(filename):
-    filename = filename.replace('}','/')
+    filename = filename.replace('>','/')
+    # print(filename)
     return send_file(filename)
+    # return ""
+
 
 
 @app.route('/make-knn-query',methods=['POST'])
@@ -50,34 +53,39 @@ def query():
     file = request.files['file']
     img = face_recognition.load_image_file(file)
     img_encoding = face_recognition.face_encodings(img)
-    _,I = faiss_index.search(np.array([img_encoding[0]],np.float32),int(request.form['k']))
-    faiss_results = []
 
+
+    #Faiss
+
+    faiss_time = time.time() 
+    _,I = faiss_index.search(np.array([img_encoding[0]],np.float32),int(request.form['k']))
+    faiss_time = time.time() - faiss_time
+    faiss_results = []
     for result in I[0]:
-        path = imgs_encodings[result].path[2:].replace('/','}')
-        # print(path)
-        faiss_results.append(path)
+        path = imgs_encodings[result].path[2:].replace('/','>')
+        name = imgs_encodings[result].dir.replace('_',' ')
+        faiss_results.append([path,name])
 
 
     # Rtree
-    p = rtindex.Property()
-    p.dimension = 128
-    p.dat_extension = "data"
-    p.idx_extension = "index"
-
-    idx = rtindex.Index("puntos", properties = p)
-
-    rtree_knn = idx.nearest(img_encoding[0], num_results = int(request.form['k']))
+   
+    rtree_time = time.time()
+    rtree_knn = rtree_index.nearest(img_encoding[0], num_results = int(request.form['k']))
+    rtree_time = time.time() - rtree_time
     rtree_results = []
+    
 
     for result in rtree_knn:
-        path = imgs_encodings[result].path[2:].replace('/', '}')
-        rtree_results.append(path)
+        path = imgs_encodings[result].path[2:].replace('/', '>')
+        rtree_results.append([path,name])
+        
 
 
     # Sequential
+
     top_k = PriorityQueue()
 
+    sequential_time = time.time()
     for i in range(len(imgs_encodings) - 1):
         curr_encoding = imgs_encodings[i].file_img_encoding
 
@@ -94,13 +102,14 @@ def query():
     sequential_results = []
     for i in range(len(top_k.queue)):
         top = top_k.queue[0]
-        print(top)
+        # print(top)
         sequential_index = top[1]
-        path = imgs_encodings[sequential_index].path[2:].replace('/', '}')
-        sequential_results = [path] + sequential_results
+        path = imgs_encodings[sequential_index].path[2:].replace('/', '>')
+        sequential_results = [[path,name]] + sequential_results
         top_k.get()
+    sequential_time = time.time() - sequential_time
 
-    return render_template('display_knn_query.html',faiss_imgs_paths = faiss_results, sequential_imgs_paths = sequential_results, rtree_imgs_paths = rtree_results) 
+    return render_template('display_knn_query.html',faiss_imgs_paths = faiss_results, sequential_imgs_paths = sequential_results, rtree_imgs_paths = rtree_results,sequential_time=sequential_time,rtree_time=rtree_time,faiss_time=faiss_time) 
 
 
 

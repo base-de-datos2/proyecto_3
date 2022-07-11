@@ -5,10 +5,14 @@
 </head>
 <body>
 
-<h2>Select your type of query:</h2>
+<h2>Tell us your query!</h2>
 
-<input style = "margin-left:20px;" type="button" value="Knn Query" onclick='location.href="/knn-query"'>
-<input style = "margin-left:20px;" type="button" value="Range Query" onclick='location.href="/range-query"'>
+<form action="/make-knn-query" method="post" enctype="multipart/form-data">
+<li style="list-style:none;"><label for = "file" >Image: </label><input type="file" name="file"></li>
+<br>
+<li style="list-style:none;"><label for = "k" >K: </label> <input type="text" style= "margin-left:29px;" name="k"></li>
+<br>
+<input style = "margin-left:180px;" type="submit" value="Send">
 
 </form>
 
