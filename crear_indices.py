@@ -2,6 +2,7 @@ import face_recognition
 import numpy as np
 import os
 from utility_functions import ImgObject
+from rtree import index
 import faiss
 from rtree import index
 
@@ -37,6 +38,31 @@ for i in result:
     print(i)
 
 
+<<<<<<< HEAD
 idx.close()
+=======
+p = index.Property()
+p.dimension = 128
+p.dat_extension = "data"
+p.idx_extension = "index"
+
+idx = index.Index("puntos", properties = p)
+
+for i in range(len(imgs_encodings)):
+    local_img = imgs_encodings[i]
+    img = local_img.file_img_encoding
+    idx.add(i,img)
+
+
+
+idx.close() 
+
+
+
+
+
+
+
+>>>>>>> 146a2edcb6ff71cbe420e947767356350c86b452
 
 
