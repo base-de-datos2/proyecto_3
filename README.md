@@ -19,3 +19,17 @@ Para construir el índice, se debe correr el archivo [crear_indices.py](/crear_i
 
 3. KNN Faiss
 
+
+
+## Experimentación
+
+|n|KNN Secuencial|KNN RTree|KNN Faiss|
+|-|-|-|-|
+|100||||
+|200||||
+|400||||
+|800||||
+|1600||||
+|3200||||
+|6400||||
+|12800||||
