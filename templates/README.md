@@ -10,11 +10,18 @@ Usar librerías para implementar un servicio de reconocimiento facial con una b�
 mostrar la diferencia de tiempos para cada método de indexación.
 
 > Librerías usadas
+## Objetivos del proyecto
+
+Usar librerías para implementar un servicio de reconocimiento facial con una búsqueda knn. Se desea
+mostrar la diferencia de tiempos para cada método de indexación.
+
+## Librerías usadas
 - face_recognition
 - python-rtree
 - faiss (usando índice hnsw)
 
 > Estrategia general y métodos implementados 
+## Estrategia general y métodos implementados 
 
 Para un reconocimiento facial necesitamos dos cosas: un repositorio de imágenes y estrategias de indexación para los vectores característicos. Por lo primero, 
 obtuvimos un repositorio de más de 13 mil imágenes (lfw). Por lo segundo, se decidió probar con las siguientes estrategias:
@@ -65,11 +72,13 @@ Para construir el índice, se debe correr el archivo [crear_indices.py](/crear_i
 |12800||||
 
 > Video de demostración
+## Video de demostración
 
 https://youtu.be/9dS-W3B6TUo
 
 
 > Levantar el proyecto
+## Levantar el proyecto
 
 Se tiene que estar en un sistema operativo POSIX (LINUX o MAC) y ejecutar el *crear_indices.py*. En caso haya pasado algo con el archivo vector_imgs.npy,
 ejecutar antes crear_vector_encodings. Finalmente, prender el servidor con *python app.py*.

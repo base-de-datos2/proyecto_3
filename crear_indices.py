@@ -38,9 +38,6 @@ for i in result:
     print(i)
 
 
-<<<<<<< HEAD
-idx.close()
-=======
 p = index.Property()
 p.dimension = 128
 p.dat_extension = "data"
@@ -63,6 +60,5 @@ idx.close()
 
 
 
->>>>>>> 146a2edcb6ff71cbe420e947767356350c86b452
 
 
