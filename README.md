@@ -37,7 +37,7 @@ Para las 2 estrategias mencionadas con índices, el procedimiento es el siguient
 - Crear el índice usando un vector, almacenado en memoria secundaria, de objectos ImgObjects
 - Guardar el índice en disco
 
-Así lo único que tiene que hacer la aplicación al levantar es cargar un índice que ya esta creado en memoria secundaria.
+Así lo único que tiene que hacer la aplicación al levantar es cargar un índice que ya esta creado en memoria secundaria. Para el knn tenemos las siguientes variantes:
 
 
 1. KNN Secuencial
@@ -49,9 +49,28 @@ Se ha utilizado un max-heap para guardar los k elementos más cercanos.
 
 Con respecto a la búsqueda de KNN con R-Tree, se ha utilizado una libreria rtree en python. Dado a que el vector característico que devuelve la función face_encodings tiene 128 valores, se ha configurado el rtree para que soporte estas 128 dimensiones. Para conseguir los k vecinos más cercanos a la imágen de búsqeuda, se utilizará la función de la librería de rtree llamada "nearest". 
 
-Para construir el índice, se debe correr el archivo [crear_indices.py](/crear_indices.py). 
 
-3. KNN Faiss
+3. KNN Faiss (HNSW)
+
+Luego, entendemos que la maldición de la dimensionalidad ocurre principalmente porque debido al número grande de dimensiones la data se va a encontrar muy esparcida. Una forma de atacar este problema es usar búsquedas aproximadas. Estas usan estimaciones para encontrar resultados, con una pequeña perdida de exactitud, de manera eficiente. Aquí es donde entra el HNSW, un índice de grafos que funciona con niveles creados en base a análisis de la distribución de la data. La idea para la structura es la siguiente:
+
+
+- Tener vértices (vectores característicos) con un máximo numero de aristas. Estas aristas deben estar distribuidas de manera uniforme.
+- Tener niveles en dónde en el más bajo los vértices tienen más aristas.
+
+
+
+Se vería algo asi: 
+![](./img/niveles_hnsw.png)
+
+Dónde el entry point es un nodo donde empieza la búsqueda. Este último algoritmo, con un query vector, hace lo siguiente:
+- Desde el nodo actual busca el vecino mas cercano al query vector 
+- Si el vecino más cercano es el nodo actual, se pasa al siguiente nivel. Si ya se encuentra en el último nivel, el nodo actual es el nodo deseado por el usuario
+- Caso contrario, ir a ese vecino.
+
+![](./img/search_hnsw.png)
+
+Esto es lo que usamos en faiss. Creamos un IndexHNSWFlat con nuestros vectores característicos y usamos el método search con n results. El cual usa distancia euclideana para compararse con los otros vértices.
 
 
 
@@ -71,9 +90,11 @@ A continuación los tiempos de experimentación para los algoritmos implementado
 |6400|0.0983|0.0295|0.0002|
 |12800|0.1914|0.065|0.0002|
 
+El archivo para los tests se llama [crear_indices.py]().
+
 
 ## Levantar el proyecto
 
-Se tiene que estar en un sistema operativo POSIX (LINUX o MAC) y ejecutar el *crear_indices.py*. En caso haya pasado algo con el archivo vector_imgs.npy,
+Se tiene que estar en un sistema operativo POSIX (LINUX o MAC) y ejecutar el [crear_indices.py](/crear_indices.py). En caso haya pasado algo con el archivo vector_imgs.npy,
 ejecutar antes crear_vector_encodings. Finalmente, prender el servidor con *python app.py*.
 
