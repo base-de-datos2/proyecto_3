@@ -77,6 +77,7 @@ def query():
 
     for result in rtree_knn:
         path = imgs_encodings[result].path[2:].replace('/', '>')
+        name = imgs_encodings[result].dir.replace('_',' ')
         rtree_results.append([path,name])
         
 
@@ -105,6 +106,7 @@ def query():
         # print(top)
         sequential_index = top[1]
         path = imgs_encodings[sequential_index].path[2:].replace('/', '>')
+        name = imgs_encodings[sequential_index].dir.replace('_',' ')
         sequential_results = [[path,name]] + sequential_results
         top_k.get()
     sequential_time = time.time() - sequential_time
