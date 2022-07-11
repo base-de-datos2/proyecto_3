@@ -34,4 +34,4 @@ A continuación los tiempos de experimentación para los algoritmos implementado
 |1600|0.0264|0.0085|0.0001|
 |3200|0.0548|0.0169|0.0001|
 |6400|0.0983|0.0295|0.0002|
-|12800|0.191|0.065|0.0002|
+|12800|0.1914|0.065|0.0002|
