@@ -4,7 +4,7 @@
 
 |Nombre|Participación|Nota
 |-|-|-|
-|Francisco Magot|KNN Secuencial, KNN R-Tree|100%|
+|Francisco Magot|KNN Secuencial, KNN R-Tree, Experimentacion|100%|
 |Eric Bracamonte|KNN Faiss, App en Flask|100%|
 
 ## Video de demostración
