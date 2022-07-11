@@ -1,8 +1,9 @@
 # Proyecto 3
 
-> Integrantes:
-|-|Participación|
------------------
+
+|Nombre|Participación|Nota
+|Francisco Magot|KNN Secuencial, KNN R-Tree|100%|
+|Eric Bracamonte|KNN Faiss, App en Flask|100%|
 
 1. KNN Secuencial
 
