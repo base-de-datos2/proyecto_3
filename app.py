@@ -15,12 +15,7 @@ app = Flask(__name__)
 with open('vector_imgs.npy',"rb") as file:
         imgs_encodings = np.load(file,allow_pickle=True)
 
-faiss_index= faiss.IndexHNSWFlat(128,32)
-
-for i in range(len(imgs_encodings)):
-    local_img = imgs_encodings[i]
-    faiss_index.add(np.array([local_img.file_img_encoding],np.float32))
-
+faiss_index= faiss.read_index("faiss_index.dat")
 
 
 @app.route('/')
@@ -48,12 +43,11 @@ def send_img(filename):
     filename = filename.replace('}','/')
     return send_file(filename)
 
+
 @app.route('/make-knn-query',methods=['POST'])
 def query():
     print(request)
-    print(request.files)
     file = request.files['file']
-    print(request.get_data())
     img = face_recognition.load_image_file(file)
     img_encoding = face_recognition.face_encodings(img)
     _,I = faiss_index.search(np.array([img_encoding[0]],np.float32),int(request.form['k']))
@@ -107,6 +101,7 @@ def query():
         top_k.get()
 
     return render_template('display_knn_query.html',faiss_imgs_paths = faiss_results, sequential_imgs_paths = sequential_results, rtree_imgs_paths = rtree_results) 
+
 
 
 if __name__ == '__main__':

@@ -8,7 +8,5 @@ class ImgObject:
         self.path = path
         self.file_img_encoding = file_img_encoding
 
-    
-    def __str__(self):
-        return 'aaaa' 
+
 

@@ -46,8 +46,8 @@
     <h2>Faiss</h2>
     <ol>
     {% for f_result in faiss_imgs_paths %}
-    <li></li>
-    <img src="{{url_for('send_img',filename=f_result)}}">
+    <li>{{f_result[1]}}</li>
+    <img src="{{url_for('send_img',filename=f_result[0])}}">
     {% endfor %}
     </ol>
 
